@@ -1,0 +1,141 @@
+In resources folder copy paste js scss files in there
+
+
+If your template provides style.scss (recommended)
+
+In resources/js/app.js:
+
+import './bootstrap';
+import '../scss/style.scss';
+
+Then run:
+
+npm install
+npm run dev
+
+or for production:
+
+npm run build
+
+Vite automatically compiles:
+
+style.scss
+      ↓
+compiled CSS
+      ↓
+public/build/assets/...
+
+You do not create or import style.css.
+
+
+Yes. During **development**, you'll typically have **two terminals running**.
+
+### Terminal 1 - Laravel server
+
+```bash
+php artisan serve
+```
+
+This starts your Laravel application.
+
+---
+
+### Terminal 2 - Vite
+
+The first time:
+
+```bash
+npm install
+```
+
+Then every time you're developing:
+
+```bash
+npm run dev
+```
+
+This watches your SCSS and JS files. Whenever you save changes, Vite recompiles them automatically.
+
+---
+
+### During development
+
+Keep both running:
+
+```text
+Terminal 1
+------------
+php artisan serve
+
+Terminal 2
+------------
+npm run dev
+```
+
+Open your browser at:
+
+```text
+http://127.0.0.1:8000
+```
+
+Any changes to:
+
+* `resources/scss/style.scss`
+* `resources/js/main.js`
+* `resources/js/app.js`
+* Blade files
+
+will update automatically (or after a browser refresh).
+
+---
+
+### For production
+
+You **do not** run `npm run dev`.
+
+Instead, run:
+
+```bash
+npm run build
+```
+
+This creates optimized CSS and JS files in:
+
+```text
+public/build/
+```
+
+Then deploy your project. On the production server, you only need:
+
+```bash
+php artisan serve
+```
+
+(or more commonly, Nginx/Apache instead of `php artisan serve`).
+
+---
+
+### Summary
+
+| Command             | Development    | Production                                                      |
+| ------------------- | -------------- | --------------------------------------------------------------- |
+| `npm install`       | ✅ Once         | ✅ Once after cloning/installing dependencies                    |
+| `npm run dev`       | ✅ Keep running | ❌ No                                                            |
+| `npm run build`     | ❌ No           | ✅ Before deployment                                             |
+| `php artisan serve` | ✅ Run          | ✅ Only for local testing (production usually uses Nginx/Apache) |
+
+For your Laravel project with the **InApp template**, the normal development workflow is:
+
+* **Terminal 1:** `php artisan serve`
+* **Terminal 2:** `npm run dev`
+
+That's the setup most Laravel developers use while building the application.
+install in child folder
+
+npm install bootstrap
+npm install apexcharts
+
+
+
+npm install -D sass-embedded
+npm install @tabler/icons-webfont

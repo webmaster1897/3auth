@@ -21,10 +21,10 @@ Route::middleware('auth')->group(function () {
 
     // Only logged-in users with role=admin can see these (authorization)
     Route::middleware('role:admin')->group(function () {
-        Route::get('/admin', fn () => view('User.userpage'))->name('admin');
+    //    Route::get('/admin', fn () => view('User.userpage'))->name('admin');
  //       Route::get('/user/create', [UserController::class, 'create']);
 
-
+Route::get('/admin',fn () => view('layouts.app'))->name('admin');
 Route::get('/users', [UserController::class, 'index']);       // list all users
 Route::get('/users/{id}', [UserController::class, 'show']);   // one user (for edit)
 Route::post('/users', [UserController::class, 'store']);      // create
