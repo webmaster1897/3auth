@@ -1,0 +1,28 @@
+Diagnosed CSRF token regeneration issue caused by multiple PHP file includes.
+Found out that every time a PHP file was loaded (included), it was making a brand new security token — so the old one stopped working.
+Fixed CSRF token mismatch by generating the token only once per session.
+Fixed it by telling the code: "only make a new token if one doesn't already exist." This way it stays the same the whole time the user is on the site.
+Identified repeated session_start() and token regeneration across layout files.
+Found that the "start session" command was being called again and again in different layout files, and each time it was creating a new token by mistake.
+Debugged Promise-based file upload failures returning HTTP 419 (CSRF mismatch).
+Looked into why file uploads (using JavaScript Promises like fetch) were failing with error 419, which means the security token didn't match.
+Investigated HTTP 422 validation errors during AJAX file uploads.
+Checked why some uploads were failing with error 422 — this means the file or form data didn't pass Laravel's validation rules (like wrong file type or missing field).
+Resolved missing CSRF token in fetch()/FormData upload requests.
+Fixed the issue where the security token wasn't being sent along with the file upload request, so the server didn't know the request was safe.
+Verified correct CSRF meta tag placement in Blade layouts.
+Checked that the special HTML tag holding the token (<meta name="csrf-token">) was properly placed in every page so JavaScript could read it correctly.
+Corrected improper fetch() headers for multipart file uploads.
+Fixed a mistake where the code was manually setting a header that it shouldn't — this was breaking how file uploads are sent to the server.
+Diagnosed stale CSRF tokens caused by layout caching and partial views.
+Found that sometimes an old (outdated) token was being shown to users because parts of the page were cached (saved and reused) instead of freshly loaded.
+Investigated upload_max_filesize and post_max_size configuration causing empty POST requests.
+Checked PHP settings that control the maximum file size allowed — if a file was too big, the whole form data (including the token) would get wiped out, causing errors.
+Verified session cookie transmission in AJAX requests to prevent CSRF failures.
+Made sure that the browser was properly sending the session cookie with each request, since the token check depends on that cookie being present.
+Used browser DevTools and Laravel logs to trace request, validation, and token issues.
+Used the browser's built-in inspector tool and Laravel's error logs to find exactly where and why requests were failing.
+Debugged Promise rejection handling for file upload requests.
+Fixed the JavaScript code so that when an upload failed, the error was properly caught and shown instead of failing silently.
+Ensured proper script loading order for Axios/JavaScript CSRF configuration.
+Made sure the JavaScript code that sets up the token (for Axios) runs before any file upload happens — otherwise the token wouldn't be ready in time.
